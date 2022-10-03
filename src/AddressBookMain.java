@@ -46,7 +46,7 @@ public class AddressBookMain {
         Contact person1 = new Contact("amit", "dutt", "651651654", "sumit@gmail.com", "kaithal", "845165489165", 5616);
         Contact person2 = new Contact("ankita", "sharma", "5949498", "sumit@gmail.com", "kurukshetra", "haryana", 94516498);
         Contact person3 = new Contact("sumit", "kumar", "5498489", "sumit@gmail.com", "bandra", "maharashtra", 4849849);
-        Contact person4 = new Contact("sunita", "rana", "195494", "sumit@gmail.com", "gurgaon", "maharashtra", 44948);
+        Contact person4 = new Contact("sunita", "rana", "195494", "sumit@gmail.com", "delhi", "maharashtra", 44948);
         Contact person5 = new Contact("anita", "sharma", "9119548989489", "anitasharma@gmail.com", "delhi", "delhi", 2554654);
        /*
       Adding contacts to different address books by using addContact method means every single addressbook
@@ -62,7 +62,7 @@ public class AddressBookMain {
         addressBook3.addContact(person5);
         addressBook3.addContact(person3);
         AddressBook addressBook4 = new AddressBook();
-        addressBook4.addContact(getInput());
+//        addressBook4.addContact(getInput());
 
     /*
     Creating hashmap of keys String type and value of addressbook
@@ -78,17 +78,23 @@ public class AddressBookMain {
         map.put("addressBook2", addressBook2);
         map.put("addressBook3", addressBook3);
         map.put("addressBook4", addressBook4);
-        String city = "gurgaon";
-
+        String city = "delhi";
+        String state = "haryana";
 
     /*
     Taking a new list of type Contact named as result. In this we are getting values of map using map.entryset
      and flatmap is used to convert various address book into one list after we are getting value of it and
      then apply stream filter to get contact in the same city as the same city taken in the input.
      */
-        List<Contact> result = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getCity().equalsIgnoreCase(city) || a.getState().equals(city)).collect(Collectors.toList());
-
-        result.stream().forEach(x -> System.out.println(x));
-
+        List<Contact> contactsInSameCity = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+        List<Contact> contactsInSameState = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+        System.out.println("------------------------------------------------->");
+        System.out.println("Contacts in the Same city are :");
+        contactsInSameCity.stream().forEach(x -> System.out.println(x));
+        System.out.println();
+        System.out.println("------------------------------------------------->");
+        System.out.println("Contacts in the Same state are :");
+        contactsInSameState.stream().forEach(x -> System.out.println(x));
+        System.out.println("------------------------------------------------->");
     }
 }
