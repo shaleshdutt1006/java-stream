@@ -2,13 +2,8 @@ import java.util.Scanner;
 
 public class AddressBookMain {
 
-    public static void main(String[] args) {
+    public static Contact input(Scanner scanner) {
 
-
-        AddressBook addressBook = new AddressBook();
-
-        System.out.println("Add details of a person");
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please provide first name");
         String firstName = scanner.next();
 
@@ -16,7 +11,7 @@ public class AddressBookMain {
         String lastName = scanner.next();
 
         System.out.println("Please provide address");
-        String address = scanner.next();
+        String mobileNumber = scanner.next();
 
         System.out.println("Please provide city");
         String city = scanner.next();
@@ -25,17 +20,37 @@ public class AddressBookMain {
         String state = scanner.next();
 
         System.out.println("Please provide zip");
-        int zip = scanner.nextInt();
+        int zipCode = scanner.nextInt();
 
         System.out.println("Please provide phone number");
-        String phoneNumber = scanner.next();
-        System.out.println("Please provide email address");
         String email = scanner.next();
 
-        Contact contact = new Contact(firstName, lastName, phoneNumber, email, city, state, zip);
-        addressBook.createContact(contact);
-        addressBook.printAddressBook();
-        scanner.close();
-    }
-}
+        Contact contact = new Contact(firstName, lastName, mobileNumber, email, city, state, zipCode);
 
+        return contact;
+    }
+
+
+    public static void main(String[] args) {
+
+        AddressBook addressBook = new AddressBook();
+        Scanner scanner = new Scanner(System.in);
+/*
+Contacts added using Constructor and print it using print function of addressbook
+ */
+        Contact person = new Contact("shalesh", "dutt", "1654684", "sumit@gmail.com", "kurukshetra","Haryana", 454780);
+        addressBook.addContact(person);
+        System.out.println("Before adding Contacts are");
+        addressBook.printAddressBook();
+/*
+Adding new Contact using addContact method and by taking input from the user using Scanner and calling input method
+and printing it
+ */
+        System.out.println("Please enter details of new contacts you want to add");
+        Contact contact1 = input(scanner);
+        addressBook.addContact(contact1);
+        System.out.println("After adding new contacts are");
+        addressBook.printAddressBook();
+    }
+
+}

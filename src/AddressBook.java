@@ -4,7 +4,7 @@ public class AddressBook {
 
     ArrayList<Contact> addressbook = new ArrayList<Contact>();
 
-    public ArrayList<Contact> createContact(Contact contact) {
+    public ArrayList<Contact> addContact(Contact contact) {
         this.addressbook.add(contact);
         return this.addressbook;
     }
