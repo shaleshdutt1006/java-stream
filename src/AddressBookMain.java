@@ -53,47 +53,25 @@ public class AddressBookMain {
     Adding contacts to different address books by using addContact method means every single addressbook
     has multiple contacts
     */
-        AddressBook addressBook1 = new AddressBook();
-        addressBook1.addContact(person1);
-        addressBook1.addContact(person2);
-        AddressBook addressBook2 = new AddressBook();
-        addressBook2.addContact(person3);
-        addressBook2.addContact(person4);
-        addressBook2.addContact(person6);
-        AddressBook addressBook3 = new AddressBook();
-        addressBook3.addContact(person5);
-        addressBook3.addContact(person3);
-        AddressBook addressBook4 = new AddressBook();
-        addressBook4.addContact(getInput());
+        AddressBook addressBook = new AddressBook();
+        addressBook.addContact(person1);
+        addressBook.addContact(person2);
+        addressBook.addContact(person3);
+        addressBook.addContact(person4);
+        addressBook.addContact(person6);
+        addressBook.addContact(person5);
+        Contact contact = getInput();
+        addressBook.addContact(contact);
+
+
+
 
     /*
-    Creating hashmap of keys String type and value of addressbook
-    */
-
-        Map<String, AddressBook> map = new HashMap<>();
-    /*
-    putting different address books in the map. Map has two parts first one is key
-    and Second one is value
-    */
-
-        map.put("addressBook1", addressBook1);
-        map.put("addressBook2", addressBook2);
-        map.put("addressBook3", addressBook3);
-        map.put("addressBook4", addressBook4);
-        String city = "delhi";
-        String state = "haryana";
-
-    /*
-    Taking a new list of type Contact named as result. In this we are getting values of map using map.entryset
-     and flatmap is used to convert various address book into one list after we are getting value of it and
-     then apply stream filter to get contact in the same city as the same city taken in the input.
+    Taking a new list of type Contact named as sortedaddressbook. In this we are sorting the contacts
+    using their first name in alphabetically manner using Comparator and comparing by getting first name.
      */
-        Long contactsInSameCity = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getCity().equalsIgnoreCase(city)).collect(Collectors.counting());
-        Long contactsInSameState = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getState().equalsIgnoreCase(state)).collect(Collectors.counting());
-        System.out.println("------------------------------------------------->");
-        System.out.println("Contacts in the Same city are : " + contactsInSameCity);
-        System.out.println("------------------------------------------------->");
-        System.out.println("Contacts in the Same state are : " + contactsInSameState);
-        System.out.println("------------------------------------------------->");
+        List<Contact> sortedaddressbook = addressBook.getAddressbook().stream().sorted(Comparator.comparing(Contact::getFirstName)).collect(Collectors.toList());
+
+        sortedaddressbook.forEach(System.out::println);
     }
 }

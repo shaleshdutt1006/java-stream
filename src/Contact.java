@@ -92,22 +92,4 @@ public class Contact {
                 '}';
     }
 
-    /*
-We are overriding the equals method according to over requirements if firstName and lastName of input is equal
-then it will give true else false here object o is the input object means the contact and this is for the object
-which is present
- */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Contact contact = (Contact) o;
-        return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName);
-    }
-
 }
