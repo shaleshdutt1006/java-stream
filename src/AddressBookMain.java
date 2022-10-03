@@ -2,7 +2,10 @@ import java.util.Scanner;
 
 public class AddressBookMain {
 
-    public static Contact input(Scanner scanner) {
+    public static Contact getInput() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Add details of a person you want to edit");
 
         System.out.println("Please provide first name");
         String firstName = scanner.next();
@@ -11,7 +14,7 @@ public class AddressBookMain {
         String lastName = scanner.next();
 
         System.out.println("Please provide address");
-        String mobileNumber = scanner.next();
+        String address = scanner.next();
 
         System.out.println("Please provide city");
         String city = scanner.next();
@@ -23,34 +26,42 @@ public class AddressBookMain {
         int zipCode = scanner.nextInt();
 
         System.out.println("Please provide phone number");
+        String mobileNumber = scanner.next();
+
+        System.out.println("Please provide email");
         String email = scanner.next();
 
         Contact contact = new Contact(firstName, lastName, mobileNumber, email, city, state, zipCode);
-
         return contact;
     }
 
 
     public static void main(String[] args) {
 
+        Contact contact = getInput();
         AddressBook addressBook = new AddressBook();
-        Scanner scanner = new Scanner(System.in);
-/*
-Contacts added using Constructor and print it using print function of addressbook
- */
-        Contact person = new Contact("shalesh", "dutt", "1654684", "sumit@gmail.com", "kurukshetra","Haryana", 454780);
-        addressBook.addContact(person);
-        System.out.println("Before adding Contacts are");
-        addressBook.printAddressBook();
-/*
-Adding new Contact using addContact method and by taking input from the user using Scanner and calling input method
-and printing it
- */
-        System.out.println("Please enter details of new contacts you want to add");
-        Contact contact1 = input(scanner);
-        addressBook.addContact(contact1);
-        System.out.println("After adding new contacts are");
-        addressBook.printAddressBook();
-    }
+        Contact person1 = new Contact("amit", "dutt", "651651654", "sumit@gmail.com", "kaithal", "845165489165", 5616);
+        Contact person2 = new Contact("ankita", "sharma", "5949498", "sumit@gmail.com", "kurukshetra", "haryana", 94516498);
+        Contact person3 = new Contact("sumit", "kumar", "5498489", "sumit@gmail.com", "bandra", "maharashtra", 4849849);
+        Contact person4 = new Contact("anybody", "rana", "195494", "sumit@gmail.com", "gurgaon", "maharashtra", 44948);
 
+        addressBook.addContact(person1);
+        addressBook.addContact(person2);
+        addressBook.addContact(person3);
+        addressBook.addContact(person4);
+/*
+Java Stream to edit details of a person filtering the contact with firstname if firstName of the addressbook
+is equal to contact first name then change it according to the input taken.
+ */
+        addressBook.getAddressbook().stream().filter(x -> x.getFirstName().equalsIgnoreCase(contact.getFirstName())).forEach(x -> {
+            x.setLastName(contact.getLastName());
+            x.setCity(contact.getCity());
+            x.setEmail(contact.getEmail());
+            x.setState(contact.getState());
+            x.setZipCode(contact.getZipCode());
+            x.setMobileNumber(contact.getMobileNumber());
+        });
+
+        addressBook.getAddressbook().stream().forEach(x -> System.out.println(x));
+    }
 }
