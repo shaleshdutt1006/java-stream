@@ -1,4 +1,6 @@
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -7,7 +9,7 @@ public class AddressBookMain {
     public static Contact getInput() {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Add details of a person you want to edit");
+        System.out.println("Add details of a person you want to add");
 
         System.out.println("Please provide first name");
         String firstName = scanner.next();
@@ -40,35 +42,60 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
 
-        AddressBook addressBook = new AddressBook();
-         /*
-        Contacts added using Constructor and print it using print function of Addressbook.
-         */
-        Contact contact = new Contact("shalesh", "dutt", "5465165", "sumit123@gmail.com", "hisar", "haryana", 129446);
+    /*
+    Adding Contacts details using Constructor of person class
+    */
+        Contact person1 = new Contact("amit", "dutt", "8165116516", "amit123@gmail.com", "kaithal", "Haryana", 84516548);
+        Contact person2 = new Contact("ankita", "sharma", "49816515649", "ankita123@gmail.com", "mumbai", "haryana", 6558498);
+        Contact person3 = new Contact("sumit", "kumar", "9146516549", "sumit123@gmail.com", "pune", "maharashtra", 849840);
+        Contact person4 = new Contact("anybody", "rana", "919848949848", "asdsa@gmail.com", "gurgaon", "haryana", 482702);
+        Contact person5 = new Contact("anita", "sharma", "9119548989489", "anitasharma@gmail.com", "delhi", "delhi", 2554654);
 
-        Contact contact1 = new Contact("Ankita", "sharma", "51651651", "sumit123@gmail.com", "ambala", "haryana", 129446);
+    /*
+    Adding contacts to different address books by using addContact method means every single addressbook
+    has multiple contacts
+    */
+        AddressBook addressBook1 = new AddressBook();
+        addressBook1.addContact(person1);
+        addressBook1.addContact(person2);
+        AddressBook addressBook2 = new AddressBook();
+        addressBook2.addContact(person3);
+        addressBook2.addContact(person4);
+        AddressBook addressBook3 = new AddressBook();
+        addressBook3.addContact(person5);
+        addressBook3.addContact(person3);
+        addressBook3.addContact(person1);
+        AddressBook addressBook4 = new AddressBook();
+        addressBook4.addContact(getInput());
+        addressBook4.addContact(getInput());
 
-        addressBook.addContact(contact);
-        addressBook.addContact(contact1);
-        addressBook.printAddressBook();
-        /*
-        Adding new Contact using addContact method and by taking input from the user using Scanner
-        and calling input method and printing it
-         */
-        System.out.println("Please enter details of new contacts you want to add");
-        Contact contact2 = getInput();
-        addressBook.addContact(contact2);
-        /*
-        Adding new Contact using addContact method and by taking input from the user using Scanner
-        and calling input method and printing it
-         */
+    /*
+    Creating hashmap of keys String type and value of addressbook
+    */
 
-        System.out.println("Please enter details of new contacts you want to add");
-        Contact contact3 = getInput();
-        addressBook.addContact(contact3);
+        Map<String, AddressBook> map = new HashMap<>();
+    /*
+    putting different address books in the map. Map has two parts first one is key
+    and Second one is value
+    */
 
-        System.out.println("Multiple Contacts of list are : ");
-        addressBook.printAddressBook();
+        map.put("addressBook1", addressBook1);
+        map.put("addressBook2", addressBook2);
+        map.put("addressBook3", addressBook3);
+        map.put("addressBook4", addressBook4);
+
+    /*
+    for-each loop to print keys and values. e.getkey() to print keys and getting values using calling print function of
+    address book we can use toString also to override the memory otherwise it shows memory location of address book only.
+    by using printAddressBook function it shows every detail of the contact.
+     */
+
+        for (Map.Entry<String, AddressBook> e : map.entrySet()) {
+            System.out.println(e.getKey());
+            e.getValue().printAddressBook();
+
+        }
+
 
     }
 
