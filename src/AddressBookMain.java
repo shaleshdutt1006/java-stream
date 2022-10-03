@@ -1,4 +1,6 @@
+
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
 
@@ -49,19 +51,18 @@ public class AddressBookMain {
         addressBook.addContact(person2);
         addressBook.addContact(person3);
         addressBook.addContact(person4);
-/*
-Java Stream to edit details of a person filtering the contact with firstname if firstName of the addressbook
-is equal to contact first name then change it according to the input taken.
- */
-        addressBook.getAddressbook().stream().filter(x -> x.getFirstName().equalsIgnoreCase(contact.getFirstName())).forEach(x -> {
-            x.setLastName(contact.getLastName());
-            x.setCity(contact.getCity());
-            x.setEmail(contact.getEmail());
-            x.setState(contact.getState());
-            x.setZipCode(contact.getZipCode());
-            x.setMobileNumber(contact.getMobileNumber());
-        });
+    /*
+    Java Stream to remove a contact by filtering the contact with firstname if firstName of the
+    address book is equal to contact first name of the input name then delete the contact.
+     */
 
+
+        addressBook.getAddressbook().removeIf(x -> x.getFirstName().equalsIgnoreCase(contact.getFirstName()));
+
+
+    /*
+    Printing all the contacts using for-each loop
+     */
         addressBook.getAddressbook().stream().forEach(x -> System.out.println(x));
     }
 }
