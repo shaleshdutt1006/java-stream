@@ -7,7 +7,7 @@ public class Contact {
     private String city;
     private int zipCode;
     private String state;
-    private String address;
+
 
     public String getFirstName() {
         return firstName;
@@ -65,15 +65,8 @@ public class Contact {
         this.state = state;
     }
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Contact(String firstName, String lastName, String mobileNumber, String email, String city, int zipCode, String state, String address) {
+    public Contact(String firstName, String lastName, String mobileNumber, String email, String city, String state, int zipCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mobileNumber = mobileNumber;
@@ -81,7 +74,7 @@ public class Contact {
         this.city = city;
         this.zipCode = zipCode;
         this.state = state;
-        this.address = address;
+
     }
 
     @Override
@@ -94,7 +87,6 @@ public class Contact {
                 ", city='" + city + '\'' +
                 ", zipCode=" + zipCode +
                 ", state='" + state + '\'' +
-                ", address='" + address + '\'' +
                 '}';
     }
 }
