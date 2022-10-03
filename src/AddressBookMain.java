@@ -1,6 +1,6 @@
 
 import java.util.Scanner;
-import java.util.stream.Collectors;
+
 
 public class AddressBookMain {
 
@@ -40,29 +40,37 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
 
-        Contact contact = getInput();
         AddressBook addressBook = new AddressBook();
-        Contact person1 = new Contact("amit", "dutt", "651651654", "sumit@gmail.com", "kaithal", "845165489165", 5616);
-        Contact person2 = new Contact("ankita", "sharma", "5949498", "sumit@gmail.com", "kurukshetra", "haryana", 94516498);
-        Contact person3 = new Contact("sumit", "kumar", "5498489", "sumit@gmail.com", "bandra", "maharashtra", 4849849);
-        Contact person4 = new Contact("anybody", "rana", "195494", "sumit@gmail.com", "gurgaon", "maharashtra", 44948);
+         /*
+        Contacts added using Constructor and print it using print function of Addressbook.
+         */
+        Contact contact = new Contact("shalesh", "dutt", "5465165", "sumit123@gmail.com", "hisar", "haryana", 129446);
 
-        addressBook.addContact(person1);
-        addressBook.addContact(person2);
-        addressBook.addContact(person3);
-        addressBook.addContact(person4);
-    /*
-    Java Stream to remove a contact by filtering the contact with firstname if firstName of the
-    address book is equal to contact first name of the input name then delete the contact.
-     */
+        Contact contact1 = new Contact("Ankita", "sharma", "51651651", "sumit123@gmail.com", "ambala", "haryana", 129446);
 
+        addressBook.addContact(contact);
+        addressBook.addContact(contact1);
+        addressBook.printAddressBook();
+        /*
+        Adding new Contact using addContact method and by taking input from the user using Scanner
+        and calling input method and printing it
+         */
+        System.out.println("Please enter details of new contacts you want to add");
+        Contact contact2 = getInput();
+        addressBook.addContact(contact2);
+        /*
+        Adding new Contact using addContact method and by taking input from the user using Scanner
+        and calling input method and printing it
+         */
 
-        addressBook.getAddressbook().removeIf(x -> x.getFirstName().equalsIgnoreCase(contact.getFirstName()));
+        System.out.println("Please enter details of new contacts you want to add");
+        Contact contact3 = getInput();
+        addressBook.addContact(contact3);
 
+        System.out.println("Multiple Contacts of list are : ");
+        addressBook.printAddressBook();
 
-    /*
-    Printing all the contacts using for-each loop
-     */
-        addressBook.getAddressbook().stream().forEach(x -> System.out.println(x));
     }
+
+
 }
