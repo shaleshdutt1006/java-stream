@@ -41,38 +41,54 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
 
-        AddressBook addressBook = new AddressBook();
-        Contact contact = getInput();
-     /*
-    Adding Contacts details using Constructor of person class
-    */
-        Contact person1 = new Contact("amit", "dutt", "8165116516", "amit123@gmail.com", "kaithal", "Haryana", 84516548);
-        Contact person2 = new Contact("ankita", "sharma", "49816515649", "ankita123@gmail.com", "mumbai", "haryana", 6558498);
-        Contact person3 = new Contact("sumit", "kumar", "9146516549", "sumit123@gmail.com", "gurgaon", "maharashtra", 849840);
-        Contact person4 = new Contact("anybody", "rana", "919848949848", "asdsa@gmail.com", "gurgaon", "haryana", 482702);
+
+        AddressBook addressBookObj = new AddressBook();
+        Contact person1 = new Contact("amit", "dutt", "651651654", "sumit@gmail.com", "kaithal", "845165489165", 5616);
+        Contact person2 = new Contact("ankita", "sharma", "5949498", "sumit@gmail.com", "kurukshetra", "haryana", 94516498);
+        Contact person3 = new Contact("sumit", "kumar", "5498489", "sumit@gmail.com", "bandra", "maharashtra", 4849849);
+        Contact person4 = new Contact("sunita", "rana", "195494", "sumit@gmail.com", "gurgaon", "maharashtra", 44948);
         Contact person5 = new Contact("anita", "sharma", "9119548989489", "anitasharma@gmail.com", "delhi", "delhi", 2554654);
+       /*
+      Adding contacts to different address books by using addContact method means every single addressbook
+      has multiple contacts
+      */
+        AddressBook addressBook1 = new AddressBook();
+        addressBook1.addContact(person1);
+        addressBook1.addContact(person2);
+        AddressBook addressBook2 = new AddressBook();
+        addressBook2.addContact(person3);
+        addressBook2.addContact(person4);
+        AddressBook addressBook3 = new AddressBook();
+        addressBook3.addContact(person5);
+        addressBook3.addContact(person3);
+        AddressBook addressBook4 = new AddressBook();
+        addressBook4.addContact(getInput());
 
-
-        addressBook.addContact(person1);
-        addressBook.addContact(person2);
-        addressBook.addContact(person3);
-        addressBook.addContact(person4);
     /*
-    Java Stream to check duplicate entry and add a contact if contact is not present by filtering the contact
-    with firstname and last name of the address book which is declared in equals and hashcode method
-    in Contact class.
-     */
-
-
-        addressBook.getAddressbook().stream().filter(a -> a.equals(contact)).findAny().orElseGet(() -> {
-            addressBook.getAddressbook().add(contact);
-            return contact;
-        });
-    /*
-    Printing all the contacts using for-each loop
+    Creating hashmap of keys String type and value of addressbook
     */
-        addressBook.getAddressbook().stream().forEach(x -> System.out.println(x));
+
+        Map<String, AddressBook> map = new HashMap<>();
+    /*
+    putting different address books in the map. Map has two parts first one is key
+    and Second one is value
+    */
+
+        map.put("addressBook1", addressBook1);
+        map.put("addressBook2", addressBook2);
+        map.put("addressBook3", addressBook3);
+        map.put("addressBook4", addressBook4);
+        String city = "gurgaon";
+
+
+    /*
+    Taking a new list of type Contact named as result. In this we are getting values of map using map.entryset
+     and flatmap is used to convert various address book into one list after we are getting value of it and
+     then apply stream filter to get contact in the same city as the same city taken in the input.
+     */
+        List<Contact> result = map.entrySet().stream().flatMap(e -> e.getValue().getAddressbook().stream()).filter(a -> a.getCity().equalsIgnoreCase(city) || a.getState().equals(city)).collect(Collectors.toList());
+
+        result.stream().forEach(x -> System.out.println(x));
 
     }
-
 }
